@@ -10,7 +10,7 @@ use actor::{Actor, ActorRegistry};
 use actors::console::ConsoleActor;
 use protocol::JsonPacketStream;
 
-use serialize::json::Json;
+use serialize::json;
 use std::io::TcpStream;
 
 #[deriving(Encodable)]
@@ -77,7 +77,7 @@ impl Actor for TabActor {
     fn handle_message(&self,
                       registry: &ActorRegistry,
                       msg_type: &String,
-                      _msg: &Json::Object,
+                      _msg: &json::Object,
                       stream: &mut TcpStream) -> Result<bool, ()> {
         Ok(match msg_type.as_slice() {
             "reconfigure" => {

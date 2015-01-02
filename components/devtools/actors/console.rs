@@ -15,7 +15,7 @@ use servo_msg::constellation_msg::PipelineId;
 
 use collections::TreeMap;
 use core::cell::RefCell;
-use serialize::json::{Json, ToJson};
+use serialize::json::{mod, Json, ToJson};
 use std::io::TcpStream;
 use std::num::Float;
 
@@ -75,7 +75,7 @@ enum ConsoleMessageType {
 #[deriving(Encodable)]
 struct GetCachedMessagesReply {
     from: String,
-    messages: Vec<Json::Object>,
+    messages: Vec<json::Object>,
 }
 
 #[deriving(Encodable)]
@@ -117,11 +117,11 @@ impl Actor for ConsoleActor {
     fn handle_message(&self,
                       _registry: &ActorRegistry,
                       msg_type: &String,
-                      msg: &Json::Object,
+                      msg: &json::Object,
                       stream: &mut TcpStream) -> Result<bool, ()> {
         Ok(match msg_type.as_slice() {
             "getCachedMessages" => {
-                let types = msg.get(&"messageTypes".to_string()).unwrap().as_list().unwrap();
+                let types = msg.get(&"messageTypes".to_string()).unwrap().as_array().unwrap();
                 let /*mut*/ messages = vec!();
                 for msg_type in types.iter() {
                     let msg_type = msg_type.as_string().unwrap();
@@ -195,7 +195,7 @@ impl Actor for ConsoleActor {
                     from: self.name(),
                     stoppedListeners: msg.get(&"listeners".to_string())
                                          .unwrap()
-                                         .as_list()
+                                         .as_array()
                                          .unwrap_or(&vec!())
                                          .iter()
                                          .map(|listener| listener.as_string().unwrap().to_string())
