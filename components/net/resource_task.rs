@@ -16,12 +16,12 @@ use servo_util::task::spawn_named;
 use hyper::header::common::UserAgent;
 use hyper::header::Headers;
 use hyper::http::RawStatus;
-use hyper::method::{Method, Get};
-use hyper::mime::{Mime, Charset};
+use hyper::method::Method;
+use hyper::mime::{Mime, Attr};
 use url::Url;
 
 use std::comm::{channel, Receiver, Sender};
-use std::str::Slice;
+use std::borrow::Cow;
 
 pub enum ControlMsg {
     /// Request the data associated with a particular URL
@@ -43,7 +43,7 @@ impl LoadData {
     pub fn new(url: Url, consumer: Sender<LoadResponse>) -> LoadData {
         LoadData {
             url: url,
-            method: Get,
+            method: Method::Get,
             headers: Headers::new(),
             data: None,
             cors: None,
@@ -86,7 +86,8 @@ impl Metadata {
             content_type: None,
             charset:      None,
             headers: None,
-            status: Some(RawStatus(200, Slice("OK"))) // http://fetch.spec.whatwg.org/#concept-response-status-message
+            // http://fetch.spec.whatwg.org/#concept-response-status-message
+            status: Some(RawStatus(200, Cow::Borrowed("OK")))
         }
     }
 
@@ -97,7 +98,7 @@ impl Metadata {
             Some(&Mime(ref type_, ref subtype, ref parameters)) => {
                 self.content_type = Some((type_.to_string(), subtype.to_string()));
                 for &(ref k, ref v) in parameters.iter() {
-                    if &Charset == k {
+                    if &Attr::Charset == k {
                         self.charset = Some(v.to_string());
                     }
                 }
