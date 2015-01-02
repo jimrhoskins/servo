@@ -11,7 +11,7 @@ use std::intrinsics::TypeId;
 use std::io::TcpStream;
 use std::mem::{transmute, transmute_copy, replace};
 use std::raw::TraitObject;
-use serialize::json;
+use serialize::json::Json;
 
 /// A common trait for all devtools actors that encompasses an immutable name
 /// and the ability to process messages that are directed to particular actors.
@@ -20,7 +20,7 @@ pub trait Actor : Any {
     fn handle_message(&self,
                       registry: &ActorRegistry,
                       msg_type: &String,
-                      msg: &json::JsonObject,
+                      msg: &Json::Object,
                       stream: &mut TcpStream) -> Result<bool, ()>;
     fn name(&self) -> String;
 }
@@ -149,7 +149,7 @@ impl ActorRegistry {
     /// Attempt to process a message as directed by its `to` property. If the actor is not
     /// found or does not indicate that it knew how to process the message, ignore the failure.
     pub fn handle_message(&mut self,
-                          msg: &json::JsonObject,
+                          msg: &Json::Object,
                           stream: &mut TcpStream)
                           -> Result<(), ()> {
         let to = msg.get(&"to".to_string()).unwrap().as_string().unwrap();
