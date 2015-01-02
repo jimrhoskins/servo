@@ -5,6 +5,7 @@
 use std::ascii::AsciiExt;
 use cssparser::parse_rule_list;
 use cssparser::ast::*;
+use cssparser::ast::ComponentValue::*;
 
 use errors::{ErrorLoggerIterator, log_css_error};
 use geom::size::TypedSize2D;
@@ -26,6 +27,7 @@ pub struct MediaQueryList {
     media_queries: Vec<MediaQuery>
 }
 
+#[deriving(PartialEq, Eq, Copy)]
 pub enum Range<T> {
     Min(T),
     Max(T),
@@ -42,11 +44,12 @@ impl<T: Ord> Range<T> {
     }
 }
 
+#[deriving(PartialEq, Eq, Copy)]
 pub enum Expression {
     Width(Range<Au>),
 }
 
-#[deriving(PartialEq)]
+#[deriving(PartialEq, Eq, Copy)]
 pub enum Qualifier {
     Only,
     Not,
@@ -69,13 +72,13 @@ impl MediaQuery {
     }
 }
 
-#[deriving(PartialEq)]
+#[deriving(PartialEq, Eq, Copy)]
 pub enum MediaQueryType {
     All,  // Always true
     MediaType(MediaType),
 }
 
-#[deriving(PartialEq)]
+#[deriving(PartialEq, Eq, Copy)]
 pub enum MediaType {
     Screen,
     Print,

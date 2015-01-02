@@ -5,7 +5,6 @@
 use std::ascii::AsciiExt;
 use std::collections::HashMap;
 use std::hash::Hash;
-use std::num::div_rem;
 use std::sync::Arc;
 
 use url::Url;
@@ -25,7 +24,7 @@ use selectors::{PseudoElement, SelectorList, SimpleSelector};
 use selectors::{get_selector_list_selectors};
 use stylesheets::{Stylesheet, iter_stylesheet_media_rules, iter_stylesheet_style_rules};
 
-#[deriving(Clone, PartialEq)]
+#[deriving(Clone, PartialEq, Eq, Copy)]
 pub enum StylesheetOrigin {
     UserAgent,
     Author,
@@ -300,7 +299,7 @@ impl Stylist {
         //        (Does it make a difference?)
         for &filename in ["user-agent.css", "servo.css", "presentational-hints.css"].iter() {
             let ua_stylesheet = Stylesheet::from_bytes(
-                read_resource_file([filename]).unwrap().as_slice(),
+                read_resource_file(&[filename]).unwrap().as_slice(),
                 Url::parse(format!("chrome:///{}", filename).as_slice()).unwrap(),
                 None,
                 None,
@@ -392,7 +391,7 @@ impl Stylist {
 
     pub fn add_quirks_mode_stylesheet(&mut self) {
         self.add_stylesheet(Stylesheet::from_bytes(
-            read_resource_file(["quirks-mode.css"]).unwrap().as_slice(),
+            read_resource_file(&["quirks-mode.css"]).unwrap().as_slice(),
             Url::parse("chrome:///quirks-mode.css").unwrap(),
             None,
             None,
@@ -625,6 +624,7 @@ fn matches_compound_selector<'a,E,N>(selector: &CompoundSelector,
 /// However since the selector "c1" raises
 /// NotMatchedAndRestartFromClosestDescendant. So the selector
 /// "b1 + c1 > b2 ~ " doesn't match and restart matching from "d1".
+#[deriving(PartialEq, Eq, Copy)]
 enum SelectorMatchingResult {
     Matched,
     NotMatchedAndRestartFromClosestLaterSibling,
@@ -764,6 +764,7 @@ fn matches_compound_selector_internal<'a,E,N>(selector: &CompoundSelector,
 }
 
 bitflags! {
+    #[deriving(Copy)]
     flags CommonStyleAffectingAttributes: u8 {
         const HIDDEN_ATTRIBUTE = 0x01,
         const NO_WRAP_ATTRIBUTE = 0x02,
@@ -778,6 +779,7 @@ pub struct CommonStyleAffectingAttributeInfo {
     pub mode: CommonStyleAffectingAttributeMode,
 }
 
+#[deriving(Copy)]
 pub enum CommonStyleAffectingAttributeMode {
     IsPresent(CommonStyleAffectingAttributes),
     IsEqual(&'static str, CommonStyleAffectingAttributes),
@@ -1083,15 +1085,14 @@ fn matches_generic_nth_child<'a,E,N>(element: &N,
               index += 1;
             }
         }
-
     }
 
     if a == 0 {
-        return b == index;
+        b == index
+    } else {
+        (index - b) / a >= 0 &&
+        (index - b) % a == 0
     }
-
-    let (n, r) = div_rem(index - b, a);
-    n >= 0 && r == 0
 }
 
 #[inline]

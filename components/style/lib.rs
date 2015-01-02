@@ -2,10 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-#![comment = "The Servo Parallel Browser Project"]
-#![license = "MPL"]
-
-#![feature(globs, macro_rules, if_let)]
+#![feature(globs, macro_rules)]
 
 #![deny(unused_imports)]
 #![deny(unused_variables)]
