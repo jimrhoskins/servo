@@ -81,7 +81,7 @@ use std::rc::Rc;
 use std::u32;
 use time::{Tm, strptime};
 
-local_data_key!(pub StackRoots: *const RootCollection)
+thread_local!(pub static StackRoots: Cell<Option<*const RootCollection>> = Cell::new(None))
 
 pub enum TimerSource {
     FromWindow(PipelineId),

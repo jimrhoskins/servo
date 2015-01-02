@@ -35,7 +35,7 @@ use std::cell::RefCell;
 use std::collections::hash_map::{HashMap, Vacant, Occupied};
 use std::sync::{Arc, Mutex};
 
-local_data_key!(pub LiveReferences: LiveDOMReferences)
+thread_local!(pub static LiveReferences: Cell<Option<LiveDOMReferences>> = Cell::new(None))
 
 /// A safe wrapper around a raw pointer to a DOM object that can be
 /// shared among tasks for use in asynchronous operations. The underlying

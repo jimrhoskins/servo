@@ -1475,7 +1475,7 @@ impl<'a> ActivationElementHelpers<'a> for JSRef<'a, Element> {
         match node.type_id() {
             NodeTypeId::Element(ElementTypeId::HTMLInputElement) => {
                 let element: &'a JSRef<'a, HTMLInputElement> = HTMLInputElementCast::to_borrowed_ref(self).unwrap();
-                Some(element as &'a Activatable + 'a)
+                Some(element as &'a (Activatable + 'a))
             },
             _ => {
                 None
