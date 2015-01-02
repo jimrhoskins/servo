@@ -9,7 +9,7 @@ use geom::rect::Rect;
 use geom::size::TypedSize2D;
 use geom::scale_factor::ScaleFactor;
 use hyper::header::Headers;
-use hyper::method::{Method, Get};
+use hyper::method::Method;
 use layers::geometry::DevicePixel;
 use servo_util::cursor::Cursor;
 use servo_util::geometry::{PagePx, ViewportPx};
@@ -26,14 +26,14 @@ impl ConstellationChan {
     }
 }
 
-#[deriving(PartialEq)]
+#[deriving(PartialEq, Eq, Copy)]
 pub enum IFrameSandboxState {
     IFrameSandboxed,
     IFrameUnsandboxed
 }
 
 // We pass this info to various tasks, so it lives in a separate, cloneable struct.
-#[deriving(Clone)]
+#[deriving(Clone, Copy)]
 pub struct Failure {
     pub pipeline_id: PipelineId,
     pub subpage_id: Option<SubpageId>,
@@ -51,7 +51,7 @@ pub struct WindowSizeData {
     pub device_pixel_ratio: ScaleFactor<ViewportPx, DevicePixel, f32>,
 }
 
-#[deriving(PartialEq)]
+#[deriving(PartialEq, Eq, Copy)]
 pub enum KeyState {
     Pressed,
     Released,
@@ -59,7 +59,7 @@ pub enum KeyState {
 }
 
 //N.B. Straight up copied from glfw-rs
-#[deriving(Show)]
+#[deriving(Show, PartialEq, Eq, Copy)]
 pub enum Key {
     Space,
     Apostrophe,
@@ -185,6 +185,7 @@ pub enum Key {
 }
 
 bitflags! {
+    #[deriving(Copy)]
     flags KeyModifiers: u8 {
         const SHIFT = 0x01,
         const CONTROL = 0x02,
@@ -228,7 +229,7 @@ impl LoadData {
     pub fn new(url: Url) -> LoadData {
         LoadData {
             url: url,
-            method: Get,
+            method: Method::Get,
             headers: Headers::new(),
             data: None,
         }
@@ -236,20 +237,20 @@ impl LoadData {
 }
 
 /// Represents the two different ways to which a page can be navigated
-#[deriving(Clone, PartialEq, Hash, Show)]
+#[deriving(Clone, PartialEq, Eq, Copy, Hash, Show)]
 pub enum NavigationType {
     Load,               // entered or clicked on a url
     Navigate,           // browser forward/back buttons
 }
 
-#[deriving(Clone, PartialEq, Hash, Show)]
+#[deriving(Clone, PartialEq, Eq, Copy, Hash, Show)]
 pub enum NavigationDirection {
     Forward,
     Back,
 }
 
-#[deriving(Clone, PartialEq, Eq, Hash, Show)]
+#[deriving(Clone, PartialEq, Eq, Copy, Hash, Show)]
 pub struct PipelineId(pub uint);
 
-#[deriving(Clone, PartialEq, Eq, Hash, Show)]
+#[deriving(Clone, PartialEq, Eq, Copy, Hash, Show)]
 pub struct SubpageId(pub uint);
