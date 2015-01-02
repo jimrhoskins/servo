@@ -26,7 +26,7 @@ use std::cmp::max;
 use std::fmt;
 use style::{ComputedValues, CSSFloat};
 use style::computed_values::{LengthOrPercentageOrAuto, table_layout};
-use sync::Arc;
+use std::sync::Arc;
 
 /// A table flow corresponded to the table's internal table fragment under a table wrapper flow.
 /// The properties `position`, `float`, and `margin-*` are used on the table wrapper fragment,

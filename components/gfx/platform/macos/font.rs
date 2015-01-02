@@ -29,7 +29,7 @@ use core_text::font_descriptor::{kCTFontDefaultOrientation};
 
 use std::num::Float;
 use std::ptr;
-use sync::Arc;
+use std::sync::Arc;
 
 pub struct FontTable {
     data: CFData,

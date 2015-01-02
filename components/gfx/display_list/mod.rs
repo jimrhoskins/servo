@@ -42,7 +42,7 @@ use std::slice::Items;
 use style::ComputedValues;
 use style::computed_values::border_style;
 use style::computed_values::cursor::{AutoCursor, SpecifiedCursor};
-use sync::Arc;
+use std::sync::Arc;
 
 // It seems cleaner to have layout code not mention Azure directly, so let's just reexport this for
 // layout to use.

@@ -25,7 +25,7 @@ use std::mem;
 use style::ComputedValues;
 use style::computed_values::{line_height, text_orientation, text_transform, white_space};
 use style::style_structs::Font as FontStyle;
-use sync::Arc;
+use std::sync::Arc;
 
 /// A stack-allocated object for scanning an inline flow into `TextRun`-containing `TextFragment`s.
 pub struct TextRunScanner {

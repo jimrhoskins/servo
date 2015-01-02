@@ -7,9 +7,9 @@
 pub use std::ascii::AsciiExt;
 use std::fmt;
 use std::fmt::Show;
+use std::sync::Arc;
 
 use servo_util::logical_geometry::{WritingMode, LogicalMargin};
-use sync::Arc;
 pub use url::Url;
 
 pub use cssparser::*;

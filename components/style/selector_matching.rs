@@ -6,7 +6,7 @@ use std::ascii::AsciiExt;
 use std::collections::HashMap;
 use std::hash::Hash;
 use std::num::div_rem;
-use sync::Arc;
+use std::sync::Arc;
 
 use url::Url;
 
@@ -1166,7 +1166,7 @@ impl<K: Eq + Hash, V> FindPush<K, V> for HashMap<K, Vec<V>> {
 
 #[cfg(test)]
 mod tests {
-    use sync::Arc;
+    use std::sync::Arc;
     use super::{DeclarationBlock, Rule, SelectorMap};
     use selectors::LocalName;
     use string_cache::Atom;

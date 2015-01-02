@@ -24,7 +24,6 @@ extern crate collections;
 extern crate core;
 extern crate devtools_traits;
 extern crate serialize;
-extern crate sync;
 extern crate "msg" as servo_msg;
 extern crate "util" as servo_util;
 
@@ -45,7 +44,7 @@ use std::comm;
 use std::comm::{Disconnected, Empty};
 use std::io::{TcpListener, TcpStream};
 use std::io::{Acceptor, Listener, TimedOut};
-use sync::{Arc, Mutex};
+use std::sync::{Arc, Mutex};
 
 mod actor;
 /// Corresponds to http://mxr.mozilla.org/mozilla-central/source/toolkit/devtools/server/actors/

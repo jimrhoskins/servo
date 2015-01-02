@@ -4,7 +4,7 @@
 
 use std::{cmp, iter};
 use std::ascii::{AsciiExt, OwnedAsciiExt};
-use sync::Arc;
+use std::sync::Arc;
 
 use cssparser::ast::*;
 use cssparser::{tokenize, parse_nth};
@@ -666,7 +666,7 @@ fn skip_whitespace<I: Iterator<ComponentValue>>(iter: &mut Iter<I>) -> bool {
 
 #[cfg(test)]
 mod tests {
-    use sync::Arc;
+    use std::sync::Arc;
     use cssparser;
     use namespaces::NamespaceMap;
     use selector_matching::StylesheetOrigin;

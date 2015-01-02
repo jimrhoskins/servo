@@ -7,7 +7,7 @@ use platform::font_context::FontContextHandle;
 use platform::font::FontHandle;
 use platform::font_template::FontTemplateData;
 
-use sync::{Arc, Weak};
+use std::sync::{Arc, Weak};
 use font::FontHandleMethods;
 
 /// Describes how to select a font from a given family.

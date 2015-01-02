@@ -58,7 +58,7 @@ use std::default::Default;
 use std::iter::{FilterMap, Peekable};
 use std::mem;
 use style::{mod, ComputedValues};
-use sync::Arc;
+use std::sync::Arc;
 use uuid;
 use string_cache::QualName;
 

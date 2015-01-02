@@ -36,7 +36,7 @@ use std::mem;
 use std::u16;
 use style::computed_values::{text_align, vertical_align, white_space};
 use style::ComputedValues;
-use sync::Arc;
+use std::sync::Arc;
 
 // From gfxFontConstants.h in Firefox
 static FONT_SUBSCRIPT_OFFSET_RATIO: f64 = 0.20;

@@ -63,7 +63,7 @@ use std::mem;
 use std::ptr;
 use style::{StylesheetOrigin, Stylesheet, Stylist, TNode, iter_font_face_rules};
 use style::{MediaType, Device};
-use sync::{Arc, Mutex, MutexGuard};
+use std::sync::{Arc, Mutex, MutexGuard};
 use url::Url;
 
 /// Mutable data belonging to the LayoutTask.

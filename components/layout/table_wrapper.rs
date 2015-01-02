@@ -28,7 +28,7 @@ use std::cmp::{max, min};
 use std::fmt;
 use style::{ComputedValues, CSSFloat};
 use style::computed_values::table_layout;
-use sync::Arc;
+use std::sync::Arc;
 
 #[deriving(Encodable, Show)]
 pub enum TableLayout {

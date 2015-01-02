@@ -23,7 +23,7 @@ use std::cmp::max;
 use std::fmt;
 use style::ComputedValues;
 use style::computed_values::LengthOrPercentageOrAuto;
-use sync::Arc;
+use std::sync::Arc;
 
 /// A single row of a table.
 #[deriving(Encodable)]

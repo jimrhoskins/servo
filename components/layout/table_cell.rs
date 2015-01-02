@@ -18,7 +18,7 @@ use wrapper::ThreadSafeLayoutNode;
 use servo_util::geometry::Au;
 use std::fmt;
 use style::{UnsignedIntegerAttribute, ComputedValues};
-use sync::Arc;
+use std::sync::Arc;
 
 /// A table formatting context.
 #[deriving(Encodable)]

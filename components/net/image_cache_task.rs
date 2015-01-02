@@ -14,7 +14,7 @@ use std::collections::HashMap;
 use std::collections::hash_map::{Occupied, Vacant};
 use std::mem::replace;
 use std::result;
-use sync::{Arc, Mutex};
+use std::sync::{Arc, Mutex};
 use serialize::{Encoder, Encodable};
 use url::Url;
 

@@ -11,7 +11,7 @@ use servo_util::cache::{Cache, HashCache};
 use servo_util::smallvec::{SmallVec, SmallVec8};
 use style::computed_values::{font_variant, font_weight};
 use style::style_structs::Font as FontStyle;
-use sync::Arc;
+use std::sync::Arc;
 
 use collections::hash::Hash;
 use platform::font_context::FontContextHandle;

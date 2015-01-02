@@ -33,7 +33,7 @@ use std::mem;
 use std::num::{Float, FloatMath};
 use std::ptr;
 use style::computed_values::border_style;
-use sync::Arc;
+use std::sync::Arc;
 use text::TextRun;
 use text::glyph::CharIndex;
 

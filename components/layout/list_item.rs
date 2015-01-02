@@ -20,7 +20,7 @@ use servo_util::geometry::Au;
 use servo_util::opts;
 use style::ComputedValues;
 use style::computed_values::list_style_type;
-use sync::Arc;
+use std::sync::Arc;
 
 /// A block with the CSS `display` property equal to `list-item`.
 #[deriving(Show)]

@@ -46,7 +46,7 @@ use style::computed_values::{background_attachment, background_repeat, border_st
 use style::computed_values::{position, visibility};
 use style::style_structs::Border;
 use style::{ComputedValues, RGBA};
-use sync::Arc;
+use std::sync::Arc;
 use url::Url;
 
 /// The results of display list building for a single flow.

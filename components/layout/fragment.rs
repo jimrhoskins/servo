@@ -46,7 +46,7 @@ use style::computed_values::{LengthOrPercentage, LengthOrPercentageOrAuto};
 use style::computed_values::{LengthOrPercentageOrNone};
 use style::computed_values::{clear, overflow_wrap, position, text_align};
 use style::computed_values::{text_decoration, vertical_align, white_space};
-use sync::{Arc, Mutex};
+use std::sync::{Arc, Mutex};
 use url::Url;
 
 /// Fragments (`struct Fragment`) are the leaves of the layout tree. They cannot position

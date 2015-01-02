@@ -60,7 +60,7 @@ use std::sync::atomic::{AtomicUint, SeqCst};
 use std::slice::MutItems;
 use style::computed_values::{clear, empty_cells, float, position, text_align};
 use style::ComputedValues;
-use sync::Arc;
+use std::sync::Arc;
 
 /// Virtual methods that make up a float context.
 ///

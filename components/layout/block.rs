@@ -62,7 +62,7 @@ use style::ComputedValues;
 use style::computed_values::{LengthOrPercentageOrAuto, LengthOrPercentageOrNone};
 use style::computed_values::{LengthOrPercentage, box_sizing, display, float};
 use style::computed_values::{overflow, position};
-use sync::Arc;
+use std::sync::Arc;
 
 /// Information specific to floated blocks.
 #[deriving(Clone, Encodable)]

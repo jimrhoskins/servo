@@ -19,7 +19,7 @@ use std::mem;
 use std::cell::{Ref, RefMut};
 use style::ComputedValues;
 use style;
-use sync::Arc;
+use std::sync::Arc;
 
 /// Data that layout associates with a node.
 pub struct PrivateLayoutData {
